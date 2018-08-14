@@ -15,9 +15,9 @@ class Node {
   bool EraseNextNode();
 
 private: 
-	Node* previous;
-	Node* next;
-	char  nodedata;
+	Node* previous_node;
+	Node* next_node;
+	char  node_data;
 };
 
 #endif  // NODE_H_

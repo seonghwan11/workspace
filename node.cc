@@ -4,88 +4,88 @@
 
 Node::Node(char data) {
 
-	previous = nullptr;
-	next = nullptr;
-	nodedata = data;
+	previous_node = nullptr;
+	next_node = nullptr;
+	node_data = data;
 
   return;
 }
 
 char Node::GetData() {
-	return nodedata;
+	return node_data;
 }
 
 Node* Node::GetPreviousNode() {
-  return previous;
+	return previous_node;
 }
 
 Node* Node::GetNextNode() {
-  return next;
+	return next_node;
 }
 
 Node* Node::InsertPreviousNode(char data) {
-	Node* newNode = new Node(data);
-	Node* prev = this->previous;
+	Node* insertNode = new Node(data);
+	Node* prevNode = this->previous_node;
 
-	newNode->next = this;
-	this->previous = newNode;
+	insertNode->next_node = this;
+	this->previous_node = insertNode;
 
-	if (prev == nullptr)
-		return newNode;
+	if (prevNode == nullptr)
+		return insertNode;
 
-	prev->next = newNode;
-	newNode->previous = prev;
+	prevNode->next_node = insertNode;
+	insertNode->previous_node = prevNode;
 
-	return newNode;
+	return insertNode;
 }
 
 Node* Node::InsertNextNode(char data) {
-	Node* newNode = new Node(data);
-	Node* next = this->next;
+	Node* insertNode = new Node(data);
+	Node* nextNode = this->next_node;
 
-	this->next = newNode;
-	newNode->previous = this;
+	this->next_node = insertNode;
+	insertNode->previous_node = this;
 
-	if (next == nullptr)
-		return newNode;
+	if (nextNode == nullptr)
+		return insertNode;
 
-	newNode->next = next;
-	next->previous = newNode;
+	insertNode->next_node = nextNode;
+	nextNode->previous_node = insertNode;
 
-	return newNode;
+	return insertNode;
 }
 
 bool Node::ErasePreviousNode() {
-	Node* delNode = this->previous;
+	Node* eraseNode = this->previous_node;
 
-	if (delNode == nullptr)
+	if (eraseNode == nullptr)
 		return false;
 
-	Node* prevNode = delNode->previous;
+	Node* prevNode = eraseNode->previous_node;
 
 	if (prevNode != nullptr)
-		prevNode->next = this;
+		prevNode->next_node = this;
 	
-	this->previous = prevNode;
+	this->previous_node = prevNode;
 
-	delete delNode;
+	delete eraseNode;
 
   return true;
 }
 
 bool Node::EraseNextNode() {
-	Node* delNode = this->next;
+	Node* eraseNode = this->next_node;
 
-	if (delNode == nullptr)
+	if (eraseNode == nullptr)
 		return false;
 
-	Node* nextNode = delNode->next;
+	Node* nextNode = eraseNode->next_node;
 
-	this->next = nextNode;
+	this->next_node = nextNode;
 	if (nextNode != nullptr)
-		nextNode->previous = this;
+		nextNode->previous_node = this;
 
-	delete delNode;
+	delete eraseNode;
 
 	return true;
 }
