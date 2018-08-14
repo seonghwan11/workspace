@@ -19,6 +19,7 @@ class TypingMachine {
   std::string Print(char separator);
 
 private:
+	bool IsValidInput(char key);
 	Node* cursor;
 	Node* headnode;
 	Node* tailnode;

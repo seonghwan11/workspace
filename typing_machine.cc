@@ -9,14 +9,12 @@ TypingMachine::TypingMachine() {
   tailnode = nullptr;
   nodesize = 0;
 
-  if (headnode == nullptr)
-	  headnode = new Node('H');
+  headnode = new Node('H');
 
-  if (tailnode == nullptr)
-  {
+  if (headnode != nullptr)
 	  tailnode = headnode->InsertNextNode('T');
-	  cursor = tailnode;
-  }
+
+  cursor = tailnode;
 
   return;
 }
@@ -45,7 +43,8 @@ void TypingMachine::RightKey() {
 }
 
 bool TypingMachine::TypeKey(char key) {
-	if ((32 <= key && key <= 126) && nodesize<100) {
+
+	if (IsValidInput(key) && nodesize<100) {
 		cursor->InsertPreviousNode(key);
 		nodesize++;
 		return true;
@@ -93,4 +92,12 @@ std::string TypingMachine::Print(char separator) {
 	}
 
 	return str;
+}
+
+bool TypingMachine::IsValidInput(char key)
+{
+	if ((32 <= key && key <= 126))
+		return true;
+	else
+		return false;
 }
